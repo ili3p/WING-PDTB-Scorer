@@ -89,7 +89,7 @@ Last update: 11-Nov-2014
 
 Copyright notice and statement of copying permission
 ------------------
-Copyright (C) 2014 WING, NUS.                                                                     
+Copyright (C) 2014 WING, NUS and NUS NLP Group.                                                                     
                                                                                                   
 This program is free software: you can redistribute it and/or modify it under the terms of the    
 GNU General Public License as published by the Free Software Foundation, either version 3 of the  
