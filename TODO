@@ -1,6 +1,8 @@
 Ilija 11-11-14: 
- - Handle different order of relations
- - Count SpanList as correct if only differs in punctuation or whitespace characters
+ # Handle different order of relations
+ # Count SpanList as correct if only differs in punctuation or whitespace characters
  - Add partial matching of Arg1 and Arg2
  - Add confusion matrix and other evaluation metrics 
- - Add tests
+ - Handle properties (Semantic type, semantic level)
+ - Add more tests
+ - Add more documentation

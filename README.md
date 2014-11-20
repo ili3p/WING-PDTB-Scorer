@@ -1,6 +1,6 @@
 Scorer for PDTB relations
 =====================================
-Requires JDK 1.6 or higher.
+Requires JDK 1.7 or higher.
 
 Score a system's performance on Connective, Semantic Class, Arg1 Span and Arg2 Span against gold standard annotations.
 
@@ -84,12 +84,12 @@ Example relation:
 
 Version
 ------------------
-Version: 0.1
-Last update: 11-Nov-2014
+Version: 0.5
+Last update: 20-Nov-2014
 
 Copyright notice and statement of copying permission
 ------------------
-Copyright (C) 2014 WING, NUS.                                                                     
+Copyright (C) 2014 WING, NUS and NUS NLP Group.                                                                     
                                                                                                   
 This program is free software: you can redistribute it and/or modify it under the terms of the    
 GNU General Public License as published by the Free Software Foundation, either version 3 of the  
