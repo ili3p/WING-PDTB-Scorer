@@ -1,0 +1,188 @@
+OVERALL
+================================
+Arg1:
+================================
+Predicted total: 1943
+ Expected total: 1940
+        Correct: 1938
+      Incorrect: 5
+         Recall: 99.90%
+      Precision: 99.74%
+             F1: 99.82%
+
+Arg2:
+================================
+Predicted total: 1943
+ Expected total: 1940
+        Correct: 1938
+      Incorrect: 5
+         Recall: 99.90%
+      Precision: 99.74%
+             F1: 99.82%
+
+
+ALTLEX
+================================
+Connective:
+================================
+Predicted total: 30
+ Expected total: 30
+        Correct: 30
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+Semantic class:
+================================
+Predicted total: 30
+ Expected total: 30
+        Correct: 30
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+Arg1:
+================================
+Predicted total: 30
+ Expected total: 30
+        Correct: 30
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+Arg2:
+================================
+Predicted total: 30
+ Expected total: 30
+        Correct: 30
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+
+ENTREL
+================================
+Arg1:
+================================
+Predicted total: 217
+ Expected total: 216
+        Correct: 216
+      Incorrect: 1
+         Recall: 100.00%
+      Precision: 99.54%
+             F1: 99.77%
+
+Arg2:
+================================
+Predicted total: 217
+ Expected total: 216
+        Correct: 216
+      Incorrect: 1
+         Recall: 100.00%
+      Precision: 99.54%
+             F1: 99.77%
+
+
+EXPLICIT
+================================
+Connective:
+================================
+Predicted total: 923
+ Expected total: 922
+        Correct: 922
+      Incorrect: 1
+         Recall: 100.00%
+      Precision: 99.89%
+             F1: 99.95%
+
+Semantic class:
+================================
+Predicted total: 923
+ Expected total: 922
+        Correct: 920
+      Incorrect: 3
+         Recall: 99.78%
+      Precision: 99.67%
+             F1: 99.73%
+
+Arg1:
+================================
+Predicted total: 923
+ Expected total: 922
+        Correct: 921
+      Incorrect: 2
+         Recall: 99.89%
+      Precision: 99.78%
+             F1: 99.84%
+
+Arg2:
+================================
+Predicted total: 923
+ Expected total: 922
+        Correct: 922
+      Incorrect: 1
+         Recall: 100.00%
+      Precision: 99.89%
+             F1: 99.95%
+
+
+IMPLICIT
+================================
+Semantic class:
+================================
+Predicted total: 769
+ Expected total: 768
+        Correct: 764
+      Incorrect: 5
+         Recall: 99.48%
+      Precision: 99.35%
+             F1: 99.41%
+
+Arg1:
+================================
+Predicted total: 769
+ Expected total: 768
+        Correct: 767
+      Incorrect: 2
+         Recall: 99.87%
+      Precision: 99.74%
+             F1: 99.80%
+
+Arg2:
+================================
+Predicted total: 769
+ Expected total: 768
+        Correct: 766
+      Incorrect: 3
+         Recall: 99.74%
+      Precision: 99.61%
+             F1: 99.67%
+
+
+NOREL
+================================
+Arg1:
+================================
+Predicted total: 4
+ Expected total: 4
+        Correct: 4
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+Arg2:
+================================
+Predicted total: 4
+ Expected total: 4
+        Correct: 4
+      Incorrect: 0
+         Recall: 100.00%
+      Precision: 100.00%
+             F1: 100.00%
+
+

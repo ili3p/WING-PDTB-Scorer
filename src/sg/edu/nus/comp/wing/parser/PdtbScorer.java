@@ -14,6 +14,8 @@
  */
 package sg.edu.nus.comp.wing.parser;
 
+import static sg.edu.nus.comp.wing.parser.util.Util.newLine;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -142,24 +144,14 @@ public class PdtbScorer {
   public static int semanticLevel;
 
   /**
-   * Error file name or errors_[timestamp] if not set,
-   */
-  private static String errFileName;
-
-  /**
    * Output file name or System.out if not set.
    */
   private static String outFileName;
 
-  private static Scanner predSc = null;
-  private static Scanner expSc = null;
-  private static PrintWriter err = null;
-  private static PrintStream out = null;
-
   /**
    * Parse the arguments and start the scorer.
    * 
-   * @param args [predictedFileName, expectedFileName, semanticLevel, errorFileName, outputFileName]
+   * @param args [predictedFileName, expectedFileName, semanticLevel, outputFileName]
    */
   public static void main(String[] args) {
 
@@ -177,28 +169,17 @@ public class PdtbScorer {
     predFileName = args[0];
     expFileName = args[1];
     semanticLevel = Integer.parseInt(args[2]);
-    errFileName = (args.length > 3) ? args[3] : "errors_" + (new Date().getTime()) + ".txt";
-    outFileName = (args.length > 4) ? args[4] : null;
+    outFileName = (args.length > 3) ? args[3] : null;
 
-    try {
+    try (PrintStream out =
+        (outFileName != null) ? new PrintStream(new File(outFileName)) : System.out) {
+      runScorer(out);
 
-      runScorer();
-
+      if (outFileName != null) {
+        System.out.println("Done. Output printed in: " + outFileName);
+      }
     } catch (IOException ex) {
       ex.printStackTrace(System.out);
-    } finally {
-      if (predSc != null) {
-        predSc.close();
-      }
-      if (expSc != null) {
-        expSc.close();
-      }
-      if (err != null) {
-        err.close();
-      }
-      if (out != null) {
-        out.close();
-      }
     }
   }
 
@@ -206,23 +187,27 @@ public class PdtbScorer {
    * Reads from predicted and expected files and compares their Connective SpanList, Semantic Class,
    * Arg1 SpanList and Arg2 SpanList columns.
    * <p>
-   * The result is printed to {@code outFileName} and errors are printed to {@code errFileName}.
+   * The result is printed to {@code outFileName}.
+   * 
+   * @param out
    * 
    * @throws IOException
    */
-  private static void runScorer() throws IOException {
+  private static void runScorer(PrintStream out) throws IOException {
 
     Map<Integer, List<Relation>> expectedMap = Util.readRelations(new File(expFileName));
     Map<Integer, List<Relation>> predictedMap = Util.readRelations(new File(predFileName));
 
     Score overallScore = getOverallScore(expectedMap, predictedMap);
-    System.out.println("Overall");
-    System.out.println(overallScore);
+    out.println("OVERALL");
+    out.println("================================");
+    out.println(overallScore);
 
     for (Type type : Relation.types) {
       Score score = getScoreForType(type, expectedMap, predictedMap);
-      System.out.println(type);
-      System.out.println(score);
+      out.println(type.toString().toUpperCase());
+      out.println("================================");
+      out.println(score);
     }
   }
 
@@ -254,6 +239,10 @@ public class PdtbScorer {
       score.setHasSemanticClass(type.hasSemanticClass());
 
       List<Relation> predictedList = predictedMap.get(commonKey);
+
+      if (predictedList == null) {
+        continue;
+      }
       int[] pairings = calculatePairings(expectedList, predictedList);
 
       for (int i = 0; i < pairings.length; ++i) {
@@ -262,26 +251,28 @@ public class PdtbScorer {
 
         Connective connectiveExp = expected.getConnective();
         Connective connectivePred = predicted.getConnective();
+        boolean connectivesMatch = false;
 
         if (type.hasActualConnective()) { // AltLex and Explicit
-          if (connectiveExp.match(connectivePred)) {
-
+          connectivesMatch = connectiveExp.match(connectivePred);
+          if (connectivesMatch) {
             score.incConnective();
+          }
+        }
+
+        if (type.hasSemanticClass()) { // AltLex, Explicit and Implicit
+          // if there is connective then it must match
+          if (!type.hasActualConnective() // Just Implicit
+              || (type.hasActualConnective() && connectivesMatch)) {
 
             SemanticClass semanticExp = expected.getSemanticClass();
             SemanticClass semanticPred = predicted.getSemanticClass();
 
+            // TODO reduce the total number of expected and predicted if no semantic class is
+            // present at the current level.
             if (semanticExp.match(semanticPred)) {
               score.incSemanticClass();
             }
-          }
-        } else if (type.hasSemanticClass()) { // Implicit
-
-          SemanticClass semanticExp = expected.getSemanticClass();
-          SemanticClass semanticPred = predicted.getSemanticClass();
-
-          if (semanticExp.match(semanticPred)) {
-            score.incSemanticClass();
           }
         }
 

@@ -7,17 +7,18 @@ Score a system's performance on Connective, Semantic Class, Arg1 Span and Arg2 S
 Usage
 ------------------
 
-`java -jar scorer.jar predictedFileName expectedFileName semanticLevel [errorFileName outputFileName]`
+`java -jar scorer.jar predictedFileName expectedFileName semanticLevel [outputFileName]`
 
  - predictedFileName - path to the file being scored
  - expectedFileName - path to the file containing the gold standard annotations
  - semanticLevel - semantic type level used to evaluate the annotations (1, 2 or 3)
 
 Optional:
-
- - errorFileName - path to a file to print error messages to. The default value is "errors_[timestamp].txt"
+ 
  - outputFileName - path to a file to print results  to. The default value is to print to console.
-	
+
+
+See sample output at [link](sample_output.txt).	
 
 Format
 ------------------
@@ -84,7 +85,7 @@ Example relation:
 
 Version
 ------------------
-Version: 0.5
+Version: 0.6
 Last update: 20-Nov-2014
 
 Copyright notice and statement of copying permission

@@ -42,19 +42,28 @@ public class Score {
     StringBuilder sb = new StringBuilder();
     if (hasConnectives) {
       sb.append("Connective:" + newLine());
+      sb.append("================================");
+      sb.append(newLine());
       sb.append(printMetric(connectivesCorrect));
       sb.append(newLine());
     }
     if (hasSemanticClass) {
       sb.append("Semantic class:" + newLine());
+      sb.append("================================");
+      sb.append(newLine());
       sb.append(printMetric(semanticClassCorrect));
       sb.append(newLine());
     }
     sb.append("Arg1:" + newLine());
+    sb.append("================================");
+    sb.append(newLine());
+
     sb.append(printMetric(arg1Correct));
     sb.append(newLine());
 
     sb.append("Arg2:" + newLine());
+    sb.append("================================");
+    sb.append(newLine());
     sb.append(printMetric(arg2Correct));
     sb.append(newLine());
 
@@ -62,16 +71,19 @@ public class Score {
   }
 
   private String printMetric(int metricCorrect) {
-    StringBuilder sb = new StringBuilder();
+
     double recall = (100.0 * metricCorrect / expectedTotal);
     double precision = (100.0 * metricCorrect / predictedTotal);
+    double f1 = (2 * recall * precision) / (recall + precision);
 
+    StringBuilder sb = new StringBuilder();
     sb.append("Predicted total: " + predictedTotal + newLine());
-    sb.append("Expected total: " + expectedTotal + newLine());
-    sb.append("Correct: " + metricCorrect + newLine());
-    sb.append("Incorrect: " + (predictedTotal - metricCorrect) + newLine());
-    sb.append("Recall: " + String.format("%.2f", recall) + "%" + newLine());
-    sb.append("Precision: " + String.format("%.2f", precision) + "%" + newLine());
+    sb.append(" Expected total: " + expectedTotal + newLine());
+    sb.append("        Correct: " + metricCorrect + newLine());
+    sb.append("      Incorrect: " + (predictedTotal - metricCorrect) + newLine());
+    sb.append("         Recall: " + String.format("%.2f", recall) + "%" + newLine());
+    sb.append("      Precision: " + String.format("%.2f", precision) + "%" + newLine());
+    sb.append("             F1: " + String.format("%.2f", f1) + "%" + newLine());
 
     return sb.toString();
   }

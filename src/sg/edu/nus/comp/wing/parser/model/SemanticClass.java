@@ -85,10 +85,14 @@ public class SemanticClass {
     for (int i = 0; i < thisSemantics.length; ++i) {
       // TODO change how the semantic level is handled
       String thisSemantic = Util.extractSemantic(thisSemantics[i], PdtbScorer.semanticLevel);
-      for (int j = 0; j < otherSemantics.length; ++j) {
-        String otherSemantic = Util.extractSemantic(otherSemantics[j], PdtbScorer.semanticLevel);
-        if (thisSemantic.equals(otherSemantic)) {
-          return true;
+      if (thisSemantic != null && thisSemantic.length() > 0) {
+        for (int j = 0; j < otherSemantics.length; ++j) {
+          String otherSemantic = Util.extractSemantic(otherSemantics[j], PdtbScorer.semanticLevel);
+          if (otherSemantic != null && otherSemantic.length() > 0) {
+            if (thisSemantic.equals(otherSemantic)) {
+              return true;
+            }
+          }
         }
       }
     }
