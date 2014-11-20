@@ -1,8 +1,14 @@
 Scorer for PDTB relations
 =====================================
-Requires JDK 1.7 or higher.
 
 Score a system's performance on Connective, Semantic Class, Arg1 Span and Arg2 Span against gold standard annotations.
+
+Version: 0.6.1
+
+Last update: 20-Nov-2014
+
+Requires JDK 1.7 or higher.
+
 
 Usage
 ------------------
@@ -83,10 +89,6 @@ Example relation:
 
 `Explicit|18|70|262..265|1,0|But|||but|||Comparison.Contrast||||Wr|Comm|Null|Null||||9..258|0|From a helicopter a thousand feet above Oakland after the second-deadliest earthquake in U.S. history, a scene of devastation emerges: a freeway crumbled into a concrete sandwich, hoses pumping water into once-fashionable apartments, abandoned autos|Inh|Null|Null|Null||||266..354|1,1;1,2;1,3|this quake wasn't the big one, the replay of 1906 that has been feared for so many years|Inh|Null|Null|Null|||||||||`
 
-Version
-------------------
-Version: 0.6
-Last update: 20-Nov-2014
 
 Copyright notice and statement of copying permission
 ------------------

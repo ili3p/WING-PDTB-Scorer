@@ -198,17 +198,40 @@ public class PdtbScorer {
     Map<Integer, List<Relation>> expectedMap = Util.readRelations(new File(expFileName));
     Map<Integer, List<Relation>> predictedMap = Util.readRelations(new File(predFileName));
 
-    Score overallScore = getOverallScore(expectedMap, predictedMap);
-    out.println("OVERALL");
-    out.println("================================");
-    out.println(overallScore);
+    int expSemanticTotal = 0;
+    int predSemanticTotal = 0;
+
+    int expConnTotal = 0;
+    int predConnTotal = 0;
 
     for (Type type : Relation.types) {
       Score score = getScoreForType(type, expectedMap, predictedMap);
       out.println(type.toString().toUpperCase());
       out.println("================================");
       out.println(score);
+
+      if (type.hasSemanticClass()) {
+        expSemanticTotal += score.getExpectedTotal();
+        predSemanticTotal += score.getPredictedTotal();
+      }
+      if (type.hasActualConnective()) {
+        expConnTotal += score.getExpectedTotal();
+        predConnTotal += score.getPredictedTotal();
+      }
     }
+    Score overallScore = getOverallScore(expectedMap, predictedMap);
+    overallScore.setHasConnectives(true);
+    overallScore.setExpConnTotal(expConnTotal);
+    overallScore.setPredConnTotal(predConnTotal);
+
+    overallScore.setHasSemanticClass(true);
+    overallScore.setExpSemanticTotal(expSemanticTotal);
+    overallScore.setPredSemanticTotal(predSemanticTotal);
+
+    out.println("OVERALL");
+    out.println("================================");
+    out.println(overallScore);
+
   }
 
   private static Score getScoreForType(Type type, Map<Integer, List<Relation>> expectedMap,
@@ -220,6 +243,7 @@ public class PdtbScorer {
     return calculateScore(expected, predicted);
   }
 
+  // TODO remove this and get statistics
   private static Score getOverallScore(Map<Integer, List<Relation>> expectedMap,
       Map<Integer, List<Relation>> predictedMap) {
     return calculateScore(expectedMap, predictedMap);

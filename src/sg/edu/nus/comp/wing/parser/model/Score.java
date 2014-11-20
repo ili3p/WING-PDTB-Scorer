@@ -26,12 +26,20 @@ public class Score {
 
   private boolean hasConnectives = false;
   private boolean hasSemanticClass = false;
+
   private int connectivesCorrect = 0;
+  private int semanticClassCorrect = 0;
   private int arg1Correct = 0;
   private int arg2Correct = 0;
-  private int semanticClassCorrect = 0;
+
   private int expectedTotal = 0;
   private int predictedTotal = 0;
+
+  private int expSemanticTotal = 0;
+  private int predSemanticTotal = 0;
+
+  private int expConnTotal = 0;
+  private int predConnTotal = 0;
 
   @Override
   public String toString() {
@@ -40,37 +48,53 @@ public class Score {
 
   private String printEvalMetrics() {
     StringBuilder sb = new StringBuilder();
+
     if (hasConnectives) {
+      if (expConnTotal == 0 && expectedTotal > 0) {
+        expConnTotal = expectedTotal;
+      }
+      if (predConnTotal == 0 && predictedTotal > 0) {
+        predConnTotal = predictedTotal;
+      }
+
       sb.append("Connective:" + newLine());
       sb.append("================================");
       sb.append(newLine());
-      sb.append(printMetric(connectivesCorrect));
+      sb.append(printMetric(connectivesCorrect, expConnTotal, predConnTotal));
       sb.append(newLine());
     }
     if (hasSemanticClass) {
+
+      if (expSemanticTotal == 0 && expectedTotal > 0) {
+        expSemanticTotal = expectedTotal;
+      }
+      if (predSemanticTotal == 0 && predictedTotal > 0) {
+        predSemanticTotal = predictedTotal;
+      }
+
       sb.append("Semantic class:" + newLine());
       sb.append("================================");
       sb.append(newLine());
-      sb.append(printMetric(semanticClassCorrect));
+      sb.append(printMetric(semanticClassCorrect, expSemanticTotal, predSemanticTotal));
       sb.append(newLine());
     }
     sb.append("Arg1:" + newLine());
     sb.append("================================");
     sb.append(newLine());
 
-    sb.append(printMetric(arg1Correct));
+    sb.append(printMetric(arg1Correct, expectedTotal, predictedTotal));
     sb.append(newLine());
 
     sb.append("Arg2:" + newLine());
     sb.append("================================");
     sb.append(newLine());
-    sb.append(printMetric(arg2Correct));
+    sb.append(printMetric(arg2Correct, expectedTotal, predictedTotal));
     sb.append(newLine());
 
     return sb.toString();
   }
 
-  private String printMetric(int metricCorrect) {
+  private static String printMetric(int metricCorrect, int expectedTotal, int predictedTotal) {
 
     double recall = (100.0 * metricCorrect / expectedTotal);
     double precision = (100.0 * metricCorrect / predictedTotal);
@@ -145,5 +169,21 @@ public class Score {
 
   public void setHasSemanticClass(boolean hasSemanticClass) {
     this.hasSemanticClass = hasSemanticClass;
+  }
+
+  public void setExpSemanticTotal(int expSemanticTotal) {
+    this.expSemanticTotal = expSemanticTotal;
+  }
+
+  public void setPredSemanticTotal(int predSemanticTotal) {
+    this.predSemanticTotal = predSemanticTotal;
+  }
+
+  public void setExpConnTotal(int expConnTotal) {
+    this.expConnTotal = expConnTotal;
+  }
+
+  public void setPredConnTotal(int predConnTotal) {
+    this.predConnTotal = predConnTotal;
   }
 }

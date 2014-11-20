@@ -1,9 +1,12 @@
-Ilija 11-11-14: 
+Ilija: 
  # Handle different order of relations
  # Count SpanList as correct if only differs in punctuation or whitespace characters
+ - Make this TODO list feature requests on GitHub
+ - Revise connectives and semantic class for Overall
+ - Handle properties (Semantic type, semantic level)
  - Add partial matching of Arg1 and Arg2
  - Add confusion matrix and other evaluation metrics 
- - Handle properties (Semantic type, semantic level)
  - Add more tests
  - Add more documentation
  - Add version change log
+ 
